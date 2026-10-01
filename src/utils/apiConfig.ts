@@ -48,30 +48,31 @@ export function getServerUrl(): string | undefined {
       return customUrl.trim();
     }
 
+    // 2. Active failover fallback (takes precedence to allow connecting to active servers when same-origin is blocked)
+    const activeFallback = localStorage.getItem('poly_active_render_backend') || cachedActiveServer;
+    if (activeFallback) {
+      return activeFallback;
+    }
+
     const hostname = window.location.hostname;
 
-    // 2. Localhost / Dev server
+    // 3. Localhost / Dev server
     if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0') {
       return undefined; // Same-origin connect
     }
 
-    // 3. Cloud Run preview/staging domain (connect to origin)
+    // 4. Cloud Run preview/staging domain (connect to origin)
     if (hostname.includes('run.app')) {
       return undefined; // Same-origin connect
     }
 
-    // 4. Automatic switch for Firebase Hosting (Waseapp-games-poly-royale.web.app / *.web.app / *.firebaseapp.com)
+    // 5. Automatic switch for Firebase Hosting (Waseapp-games-poly-royale.web.app / *.web.app / *.firebaseapp.com)
     if (hostname.includes('web.app') || hostname.includes('firebaseapp.com')) {
-      const activeFallback = localStorage.getItem('poly_active_render_backend') || cachedActiveServer;
-      if (activeFallback && (activeFallback === PRIMARY_RENDER_SERVER_URL || activeFallback === BACKUP_RENDER_SERVER_URL)) {
-        return activeFallback;
-      }
       return PRIMARY_RENDER_SERVER_URL;
     }
 
-    // 5. Any external static domain fallback
-    const activeFallback = localStorage.getItem('poly_active_render_backend') || cachedActiveServer;
-    return activeFallback || PRIMARY_RENDER_SERVER_URL;
+    // 6. Any other external static domain fallback
+    return PRIMARY_RENDER_SERVER_URL;
   }
   return undefined;
 }
