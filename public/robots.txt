@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://waseapp-game-poly-royale.web.app/sitemap.xml
