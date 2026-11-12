@@ -9,13 +9,13 @@ export interface ClassStats {
 }
 
 export const CLASS_STATS: Record<CharacterClass, ClassStats> = {
-  melee: { maxHp: 100, speed: 0.15, damage: 15, cooldown: 450, color: '#3b82f6' }, // blue, bomb blaster (12 * 1.25 = 15)
-  tank: { maxHp: 150, speed: 0.11, damage: 11, cooldown: 750, color: '#eab308' }, // yellow, heavy cannon (22 * 0.5 = 11)
-  scout: { maxHp: 35, speed: 0.28, damage: 7.5, cooldown: 250, color: '#10b981' }, // green, rapid SMG (5 * 1.5 = 7.5)
-  sword: { maxHp: 90, speed: 0.18, damage: 30, cooldown: 550, color: '#ef4444' }, // red, melee blade (24 * 1.25 = 30)
-  wizard: { maxHp: 80, speed: 0.14, damage: 22, cooldown: 700, color: '#a855f7' }, // purple, balanced fire magic (30 at Lv3)
-  sniper: { maxHp: 60, speed: 0.16, damage: 20, cooldown: 5000, color: '#0284c7' }, // tactical blue, distance scaling 20-70, 5.0s cooldown (5s/発)
-  lance: { maxHp: 100, speed: 0.17, damage: 28, cooldown: 500, color: '#f59e0b' }, // amber, long vertical thrust reach, 28 max dmg
+  melee: { maxHp: 100, speed: 0.15, damage: 15, cooldown: 450, color: '#3b82f6' }, // blue, bomb blaster
+  tank: { maxHp: 150, speed: 0.11, damage: 11, cooldown: 750, color: '#eab308' }, // yellow, heavy cannon
+  scout: { maxHp: 45, speed: 0.28, damage: 7.5, cooldown: 250, color: '#10b981' }, // green, rapid SMG
+  sword: { maxHp: 90, speed: 0.18, damage: 22, cooldown: 550, color: '#ef4444' }, // red, melee blade
+  wizard: { maxHp: 85, speed: 0.14, damage: 15, cooldown: 700, color: '#a855f7' }, // purple, balanced fire magic
+  sniper: { maxHp: 65, speed: 0.16, damage: 20, cooldown: 5000, color: '#0284c7' }, // tactical blue, distance scaling 16-36, 5.0s cooldown
+  lance: { maxHp: 95, speed: 0.17, damage: 17, cooldown: 550, color: '#f59e0b' }, // amber, long thrust reach 16m
 };
 
 export interface ClassAbilityInfo {

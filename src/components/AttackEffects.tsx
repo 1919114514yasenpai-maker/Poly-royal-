@@ -60,7 +60,9 @@ export function AttackEffects() {
         if (distSq > 85 * 85) return;
       }
 
-      if (evt.isSword) {
+      const isMeleeAttack = evt.isSword || evt.characterClass === 'sword' || evt.characterClass === 'lance';
+
+      if (isMeleeAttack) {
         if (slashArcsRef.current.length < MAX_SLASH_POOLS) {
           slashArcsRef.current.push({
             id: evt.id,

@@ -1676,13 +1676,13 @@ async function startServer() {
 
               let baseDamage = stats.damage;
               if (player.characterClass === 'sniper') {
-                // Distance-based damage scaling: minimum 20, maximum 70
+                // Distance-based damage scaling: minimum 16, maximum 36
                 const distRatio = Math.min(1, Math.max(0, dist3D / SHOOT_RANGE));
-                baseDamage = Math.round(20 + distRatio * 50);
+                baseDamage = Math.round(16 + distRatio * 20);
               } else if (player.characterClass === 'wizard') {
-                baseDamage = player.weaponLevel >= 3 ? 30 : player.weaponLevel === 2 ? 26 : 22;
+                baseDamage = 15;
               } else if (player.characterClass === 'lance') {
-                baseDamage = player.weaponLevel >= 3 ? 28 : player.weaponLevel === 2 ? 24 : 20;
+                baseDamage = 17;
               }
 
               const damageAmount = Math.max(1, Math.round((baseDamage * weaponMultiplier) * damageMult));
@@ -1716,7 +1716,7 @@ async function startServer() {
                 y: target.y + 0.2, // Slightly above center for visual clearance
                 z: target.z,
                 amount: damageAmount,
-                isSword,
+                isSword: isSword || isLance,
               });
 
               if (target.health <= 0) {
@@ -1755,7 +1755,7 @@ async function startServer() {
           dirZ,
           targetPos: input.aimTarget,
           weaponLevel: player.weaponLevel,
-          isSword,
+          isSword: isSword || isLance,
           hitTargetId,
           hitPosition: hitPos,
         });
